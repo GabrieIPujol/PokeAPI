@@ -1,0 +1,309 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+:root {
+  --bg: #070b14;
+  --secao: #0f1730;
+  --secao-2: #111f3f;
+
+  --fundo: #0a0a0a;
+  --papel-de-fundo: #fffdf2;
+  --texto: #f6f3ff;
+
+  --vermelho: #ff3b3b;
+  --amarelo: #ffd84a;
+  --azul: #4dc7ff;
+  --verde: #2ee59d;
+
+  --borda: #000000;
+  --sombra: rgba(0, 0, 0, 0.55);
+  --outline: rgba(255, 216, 74, 0.85);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--texto);
+  font-family: "Press Start 2P", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 12px 40px;
+  gap: 16px;
+  position: relative;
+  overflow-x: hidden;
+  background: radial-gradient(900px 600px at 20% 10%, rgba(255, 216, 74, 0.12), transparent 55%),
+    radial-gradient(700px 500px at 80% 35%, rgba(255, 59, 59, 0.12), transparent 55%),
+    linear-gradient(180deg, #060913 0%, #070b14 100%);
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.02) 2px,
+      rgba(0, 0, 0, 0.0) 4px
+    );
+  opacity: 0.55;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255, 216, 74, 0.06) 0px,
+      rgba(255, 216, 74, 0.0) 1px,
+      rgba(255, 216, 74, 0.0) 12px
+    );
+  opacity: 0.35;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Painel lista de pokemons */
+#pokeDados {
+  width: min(980px, 96vw);
+  padding: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 216, 74, 0.12), rgba(255, 59, 59, 0.05)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.0) 8px
+    ),
+    var(--secao);
+  border: 4px solid var(--amarelo);
+  border-radius: 14px;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.35), 0 18px 50px rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#pokeDados button {
+  appearance: none;
+  border: 3px solid rgba(0, 0, 0, 0.85);
+  background: linear-gradient(180deg, rgba(255, 59, 59, 0.96), rgba(255, 216, 74, 0.75));
+  color: var(--papel-de-fundo);
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  box-shadow:
+    0 6px 0 rgba(0, 0, 0, 0.35),
+    0 12px 30px rgba(255, 59, 59, 0.12);
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+#pokeDados button:hover {
+  filter: saturate(1.12);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 0 rgba(0, 0, 0, 0.35),
+    0 16px 40px rgba(255, 59, 59, 0.18);
+}
+
+#pokeDados button:active {
+  transform: translateY(0px);
+  box-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.35),
+    0 10px 24px rgba(255, 59, 59, 0.12);
+}
+
+#pokeDados button:focus-visible {
+  outline: 4px solid rgba(77, 199, 255, 0.65);
+  outline-offset: 2px;
+}
+
+body > div:not(#pokeDados) {
+  width: min(980px, 96vw);
+  padding: 14px;
+  border-radius: 16px;
+  border: 4px solid rgba(77, 199, 255, 0.9);
+  background:
+    linear-gradient(180deg, rgba(77, 199, 255, 0.09), rgba(255, 216, 74, 0.04)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.0) 10px
+    ),
+    var(--secao-2);
+  box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.32), 0 22px 60px rgba(0, 0, 0, 0.5);
+
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  column-gap: 18px;
+  row-gap: 12px;
+  align-items: start;
+}
+
+#imagem {
+  grid-column: 1;
+}
+
+#imagem img {
+  width: 100%;
+  height: 260px;
+  object-fit: contain;
+  display: block;
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 3px solid rgba(255, 216, 74, 0.7);
+  box-shadow:
+    inset 0 0 0 2px rgba(0, 0, 0, 0.35),
+    8px 10px 0 rgba(0, 0, 0, 0.28);
+}
+
+/* Nome */
+#nome {
+  grid-column: 2;
+  margin-top: 2px;
+}
+
+#nome p {
+  margin: 0;
+  font-size: clamp(18px, 2.6vw, 28px);
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.45);
+  -webkit-text-border: 2px var(--borda);
+}
+
+/* Blocos habilidades */
+#poderUm,
+#poderDois {        
+  grid-column: 2;
+}
+
+#poderUm p,
+#poderDois p {
+  margin: 0;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 4px solid rgba(0, 0, 0, 0.85);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+#poderUm p {
+  background:
+    linear-gradient(180deg, rgba(255, 216, 74, 0.35), rgba(255, 216, 74, 0.08));
+}
+
+#poderDois p {
+  background:
+    linear-gradient(180deg, rgba(255, 59, 59, 0.35), rgba(255, 59, 59, 0.08));
+}
+
+#poderUm p::before {
+  content: "Habilidade 1: ";
+  color: rgba(255, 216, 74, 1);
+}
+
+#poderDois p::before {
+  content: "Habilidade 2: ";
+  color: rgba(255, 59, 59, 1);
+}
+
+/* Moves */
+#moveUm,
+#moveDois,
+#moveTres {
+  grid-column: 1 / -1;
+}
+
+#moveUm p,
+#moveDois p,
+#moveTres p {
+  margin: 0;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 4px solid rgba(0, 0, 0, 0.85);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+}
+
+#moveUm p {
+  background:
+    linear-gradient(180deg, rgba(255, 216, 74, 0.28), rgba(255, 216, 74, 0.07));
+}
+
+#moveDois p {
+  background:
+    linear-gradient(180deg, rgba(255, 59, 59, 0.28), rgba(255, 59, 59, 0.07));
+}
+
+#moveTres p {
+  background:
+    linear-gradient(180deg, rgba(77, 199, 255, 0.24), rgba(77, 199, 255, 0.07));
+}
+
+#moveUm p::before {
+  content: "Move 1: ";
+  color: rgba(255, 216, 74, 1);
+}
+
+#moveDois p::before {
+  content: "Move 2: ";
+  color: rgba(255, 59, 59, 1);
+}
+
+#moveTres p::before {
+  content: "Move 3: ";
+  color: rgba(77, 199, 255, 1);
+}
+
+@media (max-width: 780px) {
+  body > div:not(#pokeDados) {
+    grid-template-columns: 1fr;
+  }
+
+  #imagem img {
+    height: 220px;
+  }
+
+  #imagem {
+    grid-column: 1;
+  }
+
+  #nome,
+  #poderUm,
+  #poderDois {
+    grid-column: 1;
+  }
+
+  #moveUm,
+  #moveDois,
+  #moveTres {
+    grid-column: 1;
+  }
+}
+
